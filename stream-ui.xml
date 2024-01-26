@@ -15,11 +15,8 @@ its infopanel, add clock, show 5 channels and 5 history
 
     <window name="streamview"  include="music-base.xml">
 
-        <shape name="streamlist_background" from="basebackground">
+        <shape name="streamlist_background" from="musicbox">
             <area>22,22,1875,327</area>
-            <type>roundbox</type>
-            <fill color="#000000" alpha="150" />
-            <line color="#FFFFFF" alpha="0" width="0" />
         </shape>
 
         <shape name="playlist_background" from="streamlist_background">
@@ -45,6 +42,7 @@ its infopanel, add clock, show 5 channels and 5 history
                     <imagetype name="buttonimage">
                         <area>25,0,52,52</area>
                         <filename>mm_icecast.png</filename>
+                        <preserveaspect>true</preserveaspect>
                     </imagetype>
 
                     <statetype name="playstate">
@@ -91,6 +89,7 @@ its infopanel, add clock, show 5 channels and 5 history
                     <imagetype name="buttonimage">
                         <area>25,0,52,52</area>
                         <filename>mm_icecast.png</filename>
+                        <preserveaspect>true</preserveaspect>
                     </imagetype>
                     <shape name="selectbar">
                         <area>0,0,100%,52</area>
@@ -123,12 +122,14 @@ its infopanel, add clock, show 5 channels and 5 history
                     <imagetype name="buttonimage">
                         <area>25,0,52,52</area>
                         <filename>mm_icecast.png</filename>
+                        <preserveaspect>true</preserveaspect>
                     </imagetype>
 
                     <textarea name="tracknum" from="buttontext">
                         <area>75,0,100,52</area>
                         <align>right,vcenter</align>
                         <template>%1 -</template>
+                        <font>basesmall</font>
                     </textarea>
 
                     <textarea name="title" from="buttontext">
@@ -154,6 +155,7 @@ its infopanel, add clock, show 5 channels and 5 history
                     <imagetype name="buttonimage">
                         <area>25,0,52,52</area>
                         <filename>mm_icecast.png</filename>
+                        <preserveaspect>true</preserveaspect>
                     </imagetype>
                     <shape name="selectbar">
                         <area>0,0,100%,52</area>
@@ -175,17 +177,7 @@ its infopanel, add clock, show 5 channels and 5 history
 
     <group name="streaminfopanel" from="baseinfopanel">
 
-        <!-- replace album with channel to re-use infopanel -->
-
-        <textarea name="album" from="basetextarea">
-            <template></template>
-        </textarea>
-
-       <textarea name="channel" from="basetextarea">
-            <area>345,127,1300,51</area>
-            <font>basemedium</font>
-            <template>%BROADCASTER| - %%CHANNEL%</template>
-        </textarea>
+        <!-- tweak infopanel shared with music-ui via music-base -->
 
         <textarea name="url" from="basetextarea">
             <font>basesmall</font>
@@ -416,6 +408,7 @@ its infopanel, add clock, show 5 channels and 5 history
                     <imagetype name="buttonimage">
                         <area>55,0,52,52</area>
                         <filename>mm_icecast.png</filename>
+                        <preserveaspect>true</preserveaspect>
                     </imagetype>
 
                     <statetype name="selectedstate">
@@ -451,6 +444,7 @@ its infopanel, add clock, show 5 channels and 5 history
                     <imagetype name="buttonimage">
                         <area>0,1,163,163</area>
                         <filename>mm_icecast.png</filename>
+                        <preserveaspect>true</preserveaspect>
                     </imagetype>
                     <shape name="selectbar">
                         <area>0,0,1830,165</area>

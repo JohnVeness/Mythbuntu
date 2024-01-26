@@ -2,6 +2,13 @@
 <!DOCTYPE mythuitheme SYSTEM "http://www.mythtv.org/schema/mythuitheme.dtd">
 <mythuitheme>
 
+    <!-- music can have a different box look here, but default to the
+         global look.  See base.xml for the baseboxbackground -->
+    <shape name="musicbox" from="baseboxbackground">
+        <!-- for testing we can give music a different color -->
+        <!-- <line color="#008800" alpha="150" width="2" /> -->
+    </shape>
+
     <!-- previous track button -->
     <button name="baseprevbutton">
         <position>1020,975</position>
@@ -688,26 +695,20 @@
     <group name="baseinfopanel">
         <area>0,712,1920,352</area>
 
-        <shape name="track_info_background" from="basebackground">
+        <textarea name="channel"> <!--radio stream?-->
+            <area>0,0,0,0</area>          <!--hidden-->
+        </textarea>
+        <shape name="track_info_background" from="musicbox">
             <area>22,0,1875,352</area>
-            <type>roundbox</type>
-            <fill color="#000000" alpha="150" />
-            <line color="#FFFFFF" alpha="0" width="0" />
-            <cornerradius>15</cornerradius>
         </shape>
 
         <textarea name="title" from="basetextarea">
-            <area>345,7,1300,51</area>
+            <area>345,10,1300,51</area>
             <font>baselarge</font>
         </textarea>
 
         <textarea name="artist" from="basetextarea">
-            <area>345,67,1255,51</area>
-            <font>basemedium</font>
-        </textarea>
-
-        <textarea name="year" from="basetextarea">
-            <area>1500,67,145,51</area>
+            <area>345,65,1255,51</area>
             <font>basemedium</font>
         </textarea>
 
@@ -716,12 +717,24 @@
             <font>basemedium</font>
         </textarea>
 
+        <textarea name="year" from="basetextarea">
+            <area>1400,65,205,51</area>
+            <font>basesmall</font>
+            <align>right,vcenter</align>
+        </textarea>
+        <textarea name="tracknum" from="year">
+            <position>1400,120</position>
+        </textarea>
+        <textarea name="info" from="year">
+            <position>1400,173</position>
+        </textarea>
+
         <!-- ratingstate moved to music-ui, not stream-ui -->
 
         <textarea name="nexttitle" from="basetextarea">
             <font>basesmall</font>
-            <area>345,217,1300,52</area>
-            <template>Next: %NEXTTITLE% \ %NEXTARTIST% \ %NEXTALBUM%</template>
+            <area>345,217,1280,52</area>
+            <template>Next: %NEXTTITLE% \ %NEXTARTIST% \ %NEXTALBUM% \ %NEXTTRACKNUM%</template>
         </textarea>
 
         <progressbar name="progress" from="basetrackprogress" depends="!channel">
@@ -732,7 +745,7 @@
         </progressbar>
 
         <textarea name="time" from="basetextarea" depends="!channel">
-            <area>345,262,262,52</area>
+            <area>345,262,320,52</area>
             <font>basesmall</font>
         </textarea>
         <textarea name="bufferstatus" from="basetextarea" depends="channel">
@@ -742,15 +755,15 @@
 
         <imagetype name="visualizer_border">
             <filename>mm_blackhole_border.png</filename>
-            <area>1623,13,243,243</area>
+            <area>1623,33,243,243</area>
         </imagetype>
 
         <video name="visualizer">
-            <area>1627,19,234,232</area>
+            <area>1627,39,234,232</area>
         </video>
 
         <textarea name="visualizername" from="basetextarea">
-            <area>1627,255,234,52</area>
+            <area>1627,275,234,52</area>
             <font>basesmall</font>
             <align>center</align>
         </textarea>
@@ -765,12 +778,13 @@
 
         <imagetype name="mm_blackhole_border">
             <filename>mm_blackhole_border.png</filename>
-            <area>48,13,243,243</area>
+            <area>50,33,243,243</area>
         </imagetype>
 
         <imagetype name="coverart">
             <filename>mm_nothumb.png</filename>
-            <area>52,19,234,232</area>
+            <preserveaspect>true</preserveaspect>
+            <area>54,39,234,232</area>
         </imagetype>
 
         <!-- musiccontrols moved to music-ui and stream-ui -->
@@ -785,9 +799,9 @@
         </textarea>
 
         <textarea name="playlisttime" from="basetextarea">
-            <area>315,0,345,45</area>
+            <area>315,0,500,45</area>
             <font>basesmall</font>
-            <align>right,top</align>
+            <align>left,top</align>
         </textarea>
 
         <progressbar name="playlistprogress" from="baseplaylistprogress">
@@ -804,9 +818,8 @@
     </group>
 
     <group name="basesmallinfopanel">
-        <shape name="trackinfo_background" from="basebackground">
+        <shape name="trackinfo_background" from="musicbox">
             <area>22,0,1875,75</area>
-            <fill color="#000000" alpha="50" />
         </shape>
 
         <imagetype name="coverart">
@@ -836,22 +849,21 @@
         </statetype>
 
         <textarea name="title" from="basetextarea">
-            <area>180,15,1395,51</area>
+            <area>180,15,1350,51</area>
             <font>basemedium</font>
-            <template>Now Playing: %TITLE% \ %ARTIST% \ %ALBUM%</template>
+            <template>Now Playing: %TITLE% \ %ARTIST% \ %ALBUM% \ %TRACKNUM%</template>
         </textarea>
 
         <textarea name="time" from="basetextarea">
-            <area>1605,22,277,51</area>
+            <area>1550,22,320,51</area>
             <align>right</align>
             <font>basesmall</font>
         </textarea>
     </group>
 
     <group name="baseplaylistpanel">
-        <shape name="playlist_background" from="basebackground">
+        <shape name="playlist_background" from="musicbox">
             <area>22,0,1875,397</area>
-            <fill color="#000000" alpha="50" />
         </shape>
 
         <buttonlist name="currentplaylist" from="basebuttonlist2">
@@ -909,7 +921,7 @@
                         <area>75,0,1635,69</area>
                         <align>left,vcenter</align>
                         <font>basesmall</font>
-                        <template>%TITLE% \ %ARTIST% \ %ALBUM%</template>
+                        <template>%TITLE% \ %ARTIST% \ %ALBUM% \ %TRACKNUM%</template>
                     </textarea>
 
                 </state>

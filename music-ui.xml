@@ -105,11 +105,8 @@
 
     <window name="playlistview" include="music-base.xml">
 
-        <shape name="titlebox">
+        <shape name="titlebox" from="musicbox">
             <area>15,15,1170,90</area>
-            <type>roundbox</type>
-            <fill color="#000000" alpha="150" />
-            <line color="#FFFFFF" alpha="0" width="0" />
             <cornerradius>45</cornerradius>
         </shape>
 
@@ -131,12 +128,8 @@
             <template>%DATE%, %TIME%</template>
         </clock>
 
-        <shape name="playlist_background" from="basebackground">
+        <shape name="playlist_background" from="musicbox">
             <area>22,120,1875,577</area>
-            <type>roundbox</type>
-            <fill color="#000000" alpha="150" />
-            <line color="#FFFFFF" alpha="0" width="0" />
-            <cornerradius>15</cornerradius>
         </shape>
 
         <statetype name="movingtracksstate" from="basemovingtracksstate">
@@ -147,7 +140,7 @@
             <area>52,127,1815,510</area>
             <multiline>yes</multiline>
             <align>allcenter</align>
-            <value>You haven't selected any tracks to play</value>
+            <value>Hit M (Menu) to add and play tracks</value>
         </textarea>
 
         <buttonlist name="currentplaylist" from="basecurrentplaylist">
@@ -177,12 +170,9 @@
     </window>
 
     <!-- some copy-n-paste from playlistview above for similar layout -->
-    <window name="trackslyricsview">
-        <shape name="clockbox">
+    <window name="trackslyricsview" include="music-base.xml">
+        <shape name="clockbox" from="musicbox">
             <area>1200,15,690,90</area>
-            <type>roundbox</type>
-            <fill color="#000000" alpha="150" />
-            <line color="#FFFFFF" alpha="0" width="0" />
             <cornerradius>45</cornerradius>
         </shape>
         <clock name="clock">
@@ -192,10 +182,9 @@
             <template>%DATE%, %TIME%</template>
         </clock>
 
-        <shape name="playlist_background" from="basebackground">
+        <shape name="playlist_background" from="musicbox">
             <area>22,120,1875,577</area>
-            <type>roundbox</type>
-            <cornerradius>15</cornerradius>
+            <fill color="#000000" alpha="255" />
         </shape>
 
         <buttonlist name="lyrics_list">
@@ -260,11 +249,94 @@
 
     </window>
 
+    <!-- some copy-n-paste from trackslyricsview above for similar layout -->
+    <window name="streamlyricsview">
+        <shape name="clockbox" from="musicbox">
+            <area>1200,15,690,90</area>
+            <cornerradius>45</cornerradius>
+        </shape>
+        <clock name="clock">
+            <area>1260,15,570,90</area>
+            <font>baselarge</font>
+            <align>vcenter,right</align>
+            <template>%DATE%, %TIME%</template>
+        </clock>
+
+        <shape name="playlist_background" from="musicbox">
+            <area>22,120,1875,577</area>
+            <fill color="#000000" alpha="255" />
+        </shape>
+
+        <buttonlist name="lyrics_list">
+            <area>40,135,1840,550</area>
+            <buttonarea>0,0,100%-10,100%</buttonarea>
+            <scrollbar name="scrollbar" from="basevertscrollbar">
+                <area>100%-10,0,10,100%</area>
+            </scrollbar>
+            <spacing>20</spacing>
+            <layout>vertical</layout>
+            <arrange>stack</arrange>
+            <showarrow>no</showarrow>
+            <searchposition>-1,410</searchposition>
+            <statetype name="buttonitem">
+                <state name="active">
+                    <area>0,0,100%,30</area>
+                    <textarea name="buttontext">
+                        <area>0,0,100%,100%</area>
+                        <align>left,vcenter</align>
+                        <font>basemedium</font>
+                    </textarea>
+                </state>
+                <state name="selectedactive" from="active">
+                    <textarea name="buttontext">
+                        <area>0,0,100%,100%</area>
+                        <align>left,vcenter</align>
+                        <font>basemediumyellow</font>
+                    </textarea>
+                </state>
+                <state name="selectedinactive" from="selectedactive">
+
+                </state>
+            </statetype>
+        </buttonlist>
+
+        <statetype name="loading_state">
+            <position>900,350</position>
+            <state name="off"></state>
+            <state name="on">
+                <imagetype name="loadinganimation">
+                    <position>0,0</position>
+                    <filepattern low="0" high="24">busyimages/%1.png</filepattern>
+                    <delay>150</delay>
+                </imagetype>
+            </state>
+        </statetype>
+
+        <textarea name="status_text" from="basetextarea">
+            <area>100,370,1080,50</area>
+            <font>basemediumyellow</font>
+            <align>center</align>
+        </textarea>
+
+        <group name="streaminfopanel" from="baseinfopanel">
+            <textarea name="url" from="basetextarea">
+                <font>basesmall</font>
+                <area>345,217,1300,52</area>
+            </textarea>
+            <button name="play" from="baseplaybutton">
+                <position>1430,270</position>
+            </button>
+            <button name="stop" from="basestopbutton">
+                <position>1500,270</position>
+            </button>
+        </group>
+
+    </window>
+
     <window name="playlisteditorview_tree" include="music-base.xml">
 
-        <shape name="browser_background" from="basebackground">
+        <shape name="browser_background" from="musicbox">
             <area>22,22,1875,555</area>
-            <fill color="#000000" alpha="50" />
         </shape>
 
         <!-- optional - shows path to current item -->
@@ -304,9 +376,8 @@
 
     <window name="playlisteditorview_gallery" include="music-base.xml">
 
-        <shape name="browser_background" from="basebackground">
+        <shape name="browser_background" from="musicbox">
             <area>22,22,1875,555</area>
-            <fill color="#000000" alpha="50" />
         </shape>
 
         <!-- optional - shows path to current item -->
@@ -347,9 +418,8 @@
 
     <window name="searchview">
 
-        <shape name="playlist_background" from="basebackground">
+        <shape name="playlist_background" from="musicbox">
             <area>22,22,1875,555</area>
-            <fill color="#000000" alpha="50" />
         </shape>
 
         <buttonlist name="field_list" from="baseselector">
@@ -400,7 +470,7 @@
                         <area>75,0,1635,69</area>
                         <align>left,vcenter</align>
                         <font>basesmall</font>
-                        <template>%TITLE% \ %ARTIST% \ %ALBUM%</template>
+                        <template>%TITLE% \ %ARTIST% \ %ALBUM% \ %TRACKNUM%</template>
                     </textarea>
 
                 </state>
@@ -455,15 +525,11 @@
     </window>
 
     <!-- used in the visualiser screen to show some track details after a track change -->
-    <window name="trackinfo_popup">
+    <window name="trackinfo_popup" include="music-base.xml">
         <area>-1,750,1300,285</area>
 
-        <shape name="background" from="basebackground">
+        <shape name="background" from="musicbox">
             <area>0,0,1300,285</area>
-            <type>roundbox</type>
-        <fill color="#000000" alpha="150" />
-        <line color="#222222" alpha="150" width="2" />
-            <cornerradius>18</cornerradius>
         </shape>
 
         <imagetype name="mm_blackhole_border">
@@ -475,41 +541,51 @@
             <area>270,22,1030,51</area>
             <font>baselarge</font>
         </textarea>
-
         <textarea name="artist" from="basetextarea">
             <area>270,75,900,51</area>
             <font>basemedium</font>
         </textarea>
-        <textarea name="year" from="basetextarea">
-          <area>1170,75,130,51</area>
-          <font>basemedium</font>
+        <textarea name="album" from="artist">
+            <area>270,128,990,51</area>
         </textarea>
 
-        <textarea name="album" from="basetextarea">
-            <area>270,128,900,51</area>
-            <font>basemedium</font>
+        <textarea name="channel"> <!--radio stream?-->
+            <area>0,0,0,0</area>          <!--hidden-->
+        </textarea>
+        <textarea name="year" from="basetextarea">
+            <area>880,75,390,51</area>
+            <font>basesmall</font>
+            <align>right,vcenter</align>
+        </textarea>
+        <textarea name="tracknum" from="year" depends="!channel">
+            <position>880,128</position>
+        </textarea>
+        <textarea name="time" from="year" depends="!channel">
+            <position>880,170</position>
+        </textarea>
+        <textarea name="length" from="year" depends="!channel&amp;!time">
+            <position>880,170</position>
         </textarea>
 
         <textarea name="nexttitle" from="basetextarea">
             <area>270,217,1030,37</area>
-            <template>Next: %NEXTTITLE% \ %NEXTARTIST% \ %NEXTALBUM%</template>
+            <template>Next: %NEXTTITLE% \ %NEXTARTIST% \ %NEXTALBUM% \ %NEXTTRACKNUM%</template>
         </textarea>
-        <textarea name="url" from="basetextarea" depends="!nexttitle">
+        <textarea name="url" from="basetextarea" depends="channel">
             <area>270,217,1030,37</area>
         </textarea>
 
-        <textarea name="length" from="basetextarea" depends="nexttitle">
-            <area>1170,128,130,51</area>
-            <font>basemedium</font>
-        </textarea>
-
-        <statetype name="ratingstate" from="baseratingstate" depends="nexttitle">
+        <statetype name="ratingstate" from="baseratingstate" depends="!channel">
             <position>270,187</position>
         </statetype>
+        <progressbar name="progress" from="basetrackprogress">
+            <position>550,187</position>
+        </progressbar>
 
         <imagetype name="coverart">
             <filename>mm_nothumb.png</filename>
             <area>33,33,216,216</area>
+            <preserveaspect>true</preserveaspect>
         </imagetype>
 
     </window>
@@ -1139,12 +1215,15 @@
         </button>
     </window>
 
-    <window name="miniplayer">
+    <window name="miniplayer" include="music-base.xml">
         <area>-1,7,885,285</area>
-        <imagetype name="track_info_background">
-            <filename>miniplayer_background.png</filename>
-            <area>15,15,853,255</area>
-        </imagetype>
+        <textarea name="channel"> <!--radio stream?-->
+            <area>0,0,0,0</area>          <!--hidden-->
+        </textarea>
+        <shape name="background" from="musicbox">
+            <area>0,0,885,285</area>
+            <fill color="#000000" alpha="200" />
+        </shape>
 
         <imagetype name="mm_blackhole_border">
             <filename>mm_blackhole_border.png</filename>
@@ -1166,15 +1245,12 @@
             <font>basemedium</font>
         </textarea>
 
-        <statetype name="ratings_state">
-        </statetype>
-
         <textarea name="info" from="basetextarea">
             <area>255,187,375,37</area>
         </textarea>
 
-        <textarea name="time" from="basetextarea">
-            <area>577,187,277,37</area>
+        <textarea name="time" from="basetextarea" depends="!channel">
+            <area>527,187,327,37</area>
             <align>right</align>
         </textarea>
 
@@ -1194,6 +1270,11 @@
                 <filename>mm_progress-fg.png</filename>
             </imagetype>
         </progressbar>
+
+        <statetype name="ratingstate" from="baseratingstate" depends="!channel">
+            <position>255,250</position>
+        </statetype>
+
     </window>
 
     <window name="volume_popup">
@@ -2169,7 +2250,7 @@
                         <area>75,0,1560,69</area>
                         <align>left,vcenter</align>
                         <font>basesmall</font>
-                        <template>%TITLE% \ %ARTIST% \ %ALBUM%</template>
+                        <template>%TITLE% \ %ARTIST% \ %ALBUM% \ %TRACKNUM%</template>
                     </textarea>
 
                     <textarea name="length">
@@ -2204,15 +2285,12 @@
     </window>
 
     <!-- shows some intemplateion for the currently selected or playing track -->
-    <window name="trackdetail_popup">
+    <window name="trackdetail_popup" include="music-base.xml">
         <area>-1,-1,1875,1050</area>
 
-        <shape name="background" from="basebackground">
+        <shape name="background" from="musicbox">
             <area>0,0,1875,1050</area>
-            <type>roundbox</type>
             <fill color="#000000" alpha="255" />
-            <line color="#222222" alpha="255" width="2" />
-            <cornerradius>18</cornerradius>
         </shape>
 
         <imagetype name="coverart">
@@ -2229,7 +2307,7 @@
         </textarea>
 
         <textarea name="title" from="basetextarea">
-            <area>780,75,945,52</area>
+            <area>780,75,1065,52</area>
             <font>basemedium</font>
         </textarea>
 
@@ -2239,7 +2317,7 @@
         </textarea>
 
         <textarea name="artist" from="title">
-            <area>780,150,945,52</area>
+            <area>780,150,1065,52</area>
         </textarea>
 
         <textarea name="albumlbl" from="titlelbl">
@@ -2248,7 +2326,7 @@
         </textarea>
 
         <textarea name="album" from="title">
-            <area>780,225,945,52</area>
+            <area>780,225,1065,52</area>
         </textarea>
 
         <textarea name="genrelbl" from="titlelbl">
@@ -2333,7 +2411,8 @@
         </textarea>
 
         <textarea name="filename" from="title">
-            <area>780,825,945,135</area>
+            <area>780,825,1065,135</area>
+            <align>top</align>
             <font>basesmall</font>
             <multiline>yes</multiline>
         </textarea>
